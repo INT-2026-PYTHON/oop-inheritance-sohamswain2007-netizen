@@ -1,5 +1,6 @@
 """
-## 1. Animal -> Dog with super()  *(Easy)*
+## 1.se of single inheritance:
+ Animal -> Dog with super()  *(Easy)*
 
 =================================================
 ANIMAL AND DOG (INHERITANCE BASICS)
@@ -7,8 +8,7 @@ ANIMAL AND DOG (INHERITANCE BASICS)
 
 Problem Statement:
 Write two classes that demonstrate the
-simplest case of single inheritance:
-
+simplest ca
    - Animal       (PARENT class)
    - Dog          (CHILD class that inherits
                     from Animal)
@@ -67,3 +67,28 @@ Rex is a Beagle
 =================================================
 
 """
+# 1. Parent class:
+class Animal:
+    def __init__(self, name, sound):
+        self.name  = name
+        self.sound = sound
+
+    def speak(self):
+        print(f"{self.name} says {self.sound}")
+# 2. Child class:
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name, "Woof")
+        self.breed = breed
+
+    def describe(self):
+        print(f"{self.name} is a {self.breed}")
+# 3. In the driver code:
+a = Animal("Cat", "Meow")
+d1 = Dog("Buddy", "Labrador")
+d2 = Dog("Rex",   "Beagle")
+a.speak()
+d1.speak()
+d1.describe()
+d2.speak()
+d2.describe()

@@ -96,3 +96,67 @@ is_valid_salary("abc")  -> False
 =================================================
 
 """
+# 1. Define the class:
+class Employee:
+    company    = "Acme Corp"   # class attr
+    raise_pct  = 5             # class attr
+
+    def __init__(self, name, salary):
+        self.name   = name
+        self.salary = salary
+# 2. INSTANCE method:
+    def apply_raise(self):
+        self.salary *= (1 + Employee.raise_pct / 100)
+# 3. CLASS method:
+    @classmethod
+    def set_raise_percentage(cls, new_pct):
+        cls.raise_pct = new_pct
+
+    @classmethod
+    def from_string(cls, csv_line):
+        name, salary_str = csv_line.split(",")
+        salary = float(salary_str)
+        return cls(name, salary)
+# 4. STATIC method:
+    @staticmethod
+    def is_valid_salary(amount):
+        return isinstance(amount, (int, float)) and amount > 0
+# 5. In the driver code:
+if __name__ == "__main__":
+    e1 = Employee("Alice", 100000)
+    e2 = Employee("Bob",   80000)
+    e3 = Employee.from_string("Carol,75000")
+
+    e1.apply_raise()                  # 5% raise
+    Employee.set_raise_percentage(10) # change class attr
+    e2.apply_raise()                  # 10% raise
+    e3.apply_raise()                  # 10% raise
+
+    print(f"{e1.name} -> {e1.salary}")
+    print(f"{e2.name} -> {e2.salary}")
+    print(f"{e3.name} -> {e3.salary}")
+
+    print(f"is_valid_salary(50000)  -> {Employee.is_valid_salary(50000)}")
+    print(f"is_valid_salary(-100)   -> {Employee.is_valid_salary(-100)}")
+    print(f"is_valid_salary('abc')  -> {Employee.is_valid_salary('abc')}")
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
